@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tito's Cave AR Test</title>
+<title>This is DAISY</title>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <!-- Google Fonts for fancier title -->
@@ -28,11 +28,12 @@
   }
 
   .title-container img {
-    width: 100px;        /* bigger size */
-    height: 100px;       /* bigger size */
+    width: 150px;        /* bigger size */
+    height: 150px;       /* bigger size */
     border-radius: 50%;  /* keep round */
     object-fit: contain;  /* show full image without cutting */
-    box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd; /* glow effect */
+    margin: 0 20px;      /* extra spacing from title */
+    box-shadow: 0 0 15px #ff9cfb, 0 0 30px #ffcdfd; /* soft glow */
   }
 
   h2 {
@@ -45,7 +46,7 @@
     position: relative;
   }
 
-  /* Glitter animation effect */
+  /* Glitter animation effect on title only */
   h2::after {
     content: '';
     position: absolute;
@@ -75,10 +76,9 @@
 
 <body>
   <div class="title-container">
-    <img src="7A819726-1F62-4904-8B36-1AFF755FA06D.png
-" alt="Left">
+    <img src="F05D0008-169D-411E-95B7-F47578DDF2E9.png" alt="Left">
     <h2>This is Daisy</h2>
-    <img src="F05D0008-169D-411E-95B7-F47578DDF2E9.png" alt="Right">
+    <img src="7A819726-1F62-4904-8B36-1AFF755FA06D.png" alt="Right">
   </div>
 
   <model-viewer src="Daisy.glb"
