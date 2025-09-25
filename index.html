@@ -74,6 +74,25 @@
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
   }
 
+  .reaction-button {
+    margin: 1rem 0;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #ff6cfb;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .reaction-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+
   .description {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
@@ -84,8 +103,7 @@
     max-width: 600px;
   }
 
-  /* Hearts container */
-  #hearts-container {
+  #hearts-container, #comments-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -93,7 +111,6 @@
     height: 100%;
     pointer-events: none;
     overflow: hidden;
-    z-index: 1000;
   }
 
   .heart {
@@ -108,18 +125,6 @@
     0% { transform: translateY(0) scale(0.5); opacity: 0; }
     10% { opacity: 1; }
     100% { transform: translateY(-100px) scale(1); opacity: 0; }
-  }
-
-  /* Floating comments container */
-  #comments-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1001;
   }
 
   .comment {
@@ -167,6 +172,11 @@
     .comment {
       font-size: 0.9rem;
     }
+
+    .reaction-button {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
   }
 </style>
 </head>
@@ -193,6 +203,10 @@
     ar-modes="webxr scene-viewer quick-look"
     environment-image="neutral">
   </model-viewer>
+
+  <!-- Reaction button -->
+  <button class="reaction-button" id="reactionButton">My honest reaction</button>
+  <audio id="reactionSound" src="aww.mp3"></audio> <!-- Replace with your sound file -->
 
   <p class="description">
     Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when she's extra hungry!
@@ -251,7 +265,16 @@
       setTimeout(() => commentsContainer.removeChild(comment), 4000);
     }
 
-    setInterval(spawnComment, 1000); // spawn every 1 second
+    setInterval(spawnComment, 1000);
+
+    // Reaction button functionality
+    const reactionButton = document.getElementById('reactionButton');
+    const reactionSound = document.getElementById('reactionSound');
+
+    reactionButton.addEventListener('click', () => {
+      reactionSound.currentTime = 0;
+      reactionSound.play();
+    });
   </script>
 </body>
 </html>
