@@ -22,41 +22,11 @@
     position: relative;
   }
 
-  /* Sparkles container */
-  #sparkles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-  }
-
-  .spark {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0;
-    animation: sparkleAnim 1s ease-in-out forwards;
-  }
-
-  @keyframes sparkleAnim {
-    0% { opacity: 0; transform: scale(0.3); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.3); }
-  }
-
   .title-container {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
     gap: 2rem;
-    position: relative;
-    z-index: 1;
   }
 
   .title-container img {
@@ -102,8 +72,6 @@
     height: 500px;
     border-radius: 20px;
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
-    position: relative;
-    z-index: 1;
   }
 
   .description {
@@ -114,8 +82,6 @@
     margin-top: 1.5rem;
     line-height: 1.5;
     max-width: 600px;
-    position: relative;
-    z-index: 1;
   }
 
   #hearts-container {
@@ -170,9 +136,6 @@
 </head>
 
 <body>
-  <!-- Sparkles overlay -->
-  <div id="sparkles-container"></div>
-
   <!-- Hearts effect container -->
   <div id="hearts-container"></div>
 
@@ -183,4 +146,50 @@
   </div>
 
   <model-viewer src="Daisy.glb"
-    i
+    ios-src="Daisy.usdz"
+    alt="Daisy"
+    ar
+    auto-rotate
+    camera-controls
+    ar-modes="webxr scene-viewer quick-look"
+    environment-image="neutral">
+  </model-viewer>
+
+  <p class="description">
+    Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when she's extra hungry!
+  </p>
+
+  <script>
+    async function checkARCoreCompatibility() {
+      const modelViewer = document.querySelector('model-viewer');
+      if (navigator.xr) {
+        const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
+        if (!isARCoreSupported) {
+          modelViewer.removeAttribute('ar');
+          modelViewer.removeAttribute('ar-modes');
+          alert('Your device is not compatible with AR features. You can still view the 3D model.');
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+
+    // Floating hearts effect
+    const heartsContainer = document.getElementById('hearts-container');
+    const heartGif = 'hearts-spin.gif'; // replace with your heart GIF file
+
+    function spawnHeart() {
+      const heart = document.createElement('img');
+      heart.src = heartGif;
+      heart.className = 'heart';
+      const heartSize = 70;
+      heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
+      heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heartsContainer.removeChild(heart), 3000);
+    }
+
+    setInterval(spawnHeart, 500);
+  </script>
+</body>
+</html>
