@@ -24,17 +24,17 @@
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
-    gap: 2rem; /* more space between images and title */
+    gap: 2rem; /* space between images and title */
   }
 
   .title-container img {
-    width: auto;       /* use full natural width */
-    height: auto;      /* use full natural height */
-    max-height: 200px; /* optional: limit so it doesn't explode the layout */
-    border-radius: 0;  /* remove round frame */
+    width: auto;       /* full natural width */
+    height: auto;      /* full natural height */
+    max-height: 200px; /* optional limit for layout */
+    border-radius: 0;  /* no round frame */
     object-fit: contain; /* show entire image */
-    margin: 0;         /* no extra margin needed, gap handles spacing */
-    box-shadow: none;  /* remove any glow/frame */
+    margin: 0;
+    box-shadow: none;  /* remove glow/frame */
   }
 
   h2 {
@@ -71,6 +71,26 @@
     height: 500px;
     border-radius: 20px;
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
+  }
+
+  /* Responsive adjustments for mobile */
+  @media (max-width: 600px) {
+    .title-container {
+      flex-direction: column; /* stack images and title vertically */
+      gap: 1rem;              /* smaller spacing for mobile */
+      align-items: center;
+    }
+
+    .title-container img {
+      max-width: 80%;   /* scale images to fit screen */
+      height: auto;     /* maintain aspect ratio */
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 2rem;  /* scale title down for mobile */
+      text-align: center;
+    }
   }
 </style>
 </head>
