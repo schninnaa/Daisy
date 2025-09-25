@@ -4,169 +4,36 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>I am Daisy</title>
-  <!-- model-viewer for glTF/GLB + USDZ (AR Quick Look on iOS) -->
+  <!-- Load model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    :root{
-      --header-height: 220px;
-      --accent: rgba(255,255,255,0.9);
-      --max-width: 1100px;
+    body {
+      margin: 0;
+      background: #ffffff;         /* full white background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;               /* fill the screen */
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background-color:#f3f4f6;
-      display:flex;
-      justify-content:center;
-      padding:30px 16px;
-    }
-    .page{
-      width:100%;
-      max-width:var(--max-width);
-      background: white;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow: 0 8px 30px rgba(16,24,40,0.08);
-    }
-
-    /* Header area with background image */
-    .hero{
-      position:relative;
-      height:var(--header-height);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background-size:cover;
-      background-position:center;
-      color:var(--accent);
-    }
-
-    .hero-overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.28));
-      pointer-events:none;
-    }
-
-    .hero-content{
-      position:relative; /* above overlay */
-      z-index:2;
-      text-align:center;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      justify-content:center;
-      width:100%;
-      padding:0 60px;
-    }
-
-    h1{
-      margin:0;
-      font-weight:700;
-      font-size:32px;
-      letter-spacing:0.2px;
-      color:white;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.45);
-    }
-
-    /* side images near the header */
-    .side-image{
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      width:90px;
-      height:90px;
-      object-fit:cover;
-      border-radius:10px;
-      border:3px solid rgba(255,255,255,0.9);
-      box-shadow:0 6px 20px rgba(0,0,0,0.18);
-      background:white;
-      z-index:3;
-    }
-    .side-left{ left:18px; }
-    .side-right{ right:18px; }
-
-    /* Main content area */
-    .content{
-      padding:28px 24px 40px 24px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-      align-items:center;
-    }
-
-    model-viewer{
-      width:100%;
-      max-width:720px;
-      height:560px;
-      border-radius:12px;
-      background:linear-gradient(180deg,#eee,#ddd);
-      box-shadow: 0 10px 30px rgba(2,6,23,0.06);
-    }
-
-    .notes{
-      max-width:720px;
-      font-size:14px;
-      color:#374151;
-      text-align:center;
-    }
-
-    /* small responsive tweaks */
-    @media (max-width:640px){
-      .side-image{ display:none; }
-      h1{ font-size:22px }
-      model-viewer{ height:440px }
+    model-viewer {
+      width: 90vw;                 /* responsive */
+      max-width: 800px;
+      height: 80vh;
+      background: #ffffff;         /* white viewer background */
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <!-- Set your hero background image here by editing the inline style or via CSS -->
-    <header class="hero" style="background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80');">
-      <div class="hero-overlay" aria-hidden="true"></div>
 
-      <!-- left and right images next to the header text -->
-      <img class="side-image side-left" src="7A819726-1F62-4904-8B36-1AFF755FA06D.png" alt="Left decorative image">
-      <div class="hero-content">
-        <h1>I am Daisy</h1>
-      </div>
-      <img class="side-image side-right" src="F05D0008-169D-411E-95B7-F47578DDF2E9.png" alt="Right decorative image">
-    </header>
+  <!-- ✅ Change the path if your file is elsewhere -->
+  <model-viewer src="Daisy.glb"
+    alt="3D model of Daisy"
+    camera-controls
+    auto-rotate
+    environment-image="neutral"
+    exposure="1"
+    shadow-intensity="1">
+  </model-viewer>
 
-    <main class="content">
-      <!-- model-viewer: use relative paths to the models folder -->
-      <model-viewer id="mv"
-        src="./models/daisy.glb"
-        ios-src="./models/daisy.usdz"
-        alt="3D model of Daisy"
-        camera-controls
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        environment-image="neutral"
-        poster="./models/daisy-poster.jpg"
-        shadow-intensity="1"
-        exposure="1"
-        autoplay
-      >
-        <!-- AR Button -->
-        <button slot="ar-button" aria-hidden="false">View in your space</button>
-      </model-viewer>
-
-      <p class="notes">
-        To make AR work properly on iOS (USDZ / Quick Look) and Android (Scene Viewer / WebXR):
-        host these files over <strong>HTTPS</strong>.
-      </p>
-    </main>
-  </div>
-
-  <!-- Optional JS for extra interactions -->
-  <script>
-    document.addEventListener('click', (e) => {
-      if(e.target && e.target.closest('button')){
-        // Custom AR button behavior if needed
-      }
-    });
-  </script>
 </body>
 </html>
