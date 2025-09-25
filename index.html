@@ -1,121 +1,35 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>I am Daisy</title>
-  <!-- model-viewer for 3D + AR -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <style>
-    :root {
-      --max-width: 1000px;
-    }
-    body {
-      margin: 0;
-      background: #ffffff;      /* all-white page background */
-      font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 30px 16px;
-    }
-    .page {
-      width: 100%;
-      max-width: var(--max-width);
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    /* ----- HEADER ----- */
-    header.hero {
-      position: relative;
-      background: #000000;      /* black header */
-      color: #ffffff;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    header.hero h1 {
-      margin: 0;
-      font-size: 32px;
-      z-index: 2;
-    }
-
-    /* Side images */
-    .side-image {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 90px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 3px solid #ffffff;
-      background: #ffffff;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
-    }
-    .side-left  { left: 18px; }
-    .side-right { right: 18px; }
-
-    /* ----- MAIN CONTENT ----- */
-    main.content {
-      padding: 30px 20px 50px 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    model-viewer {
-      width: 100%;
-      max-width: 720px;
-      height: 560px;
-      background: #ffffff;      /* white viewer background */
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
-
-    @media (max-width: 640px) {
-      .side-image { display: none; }
-      header.hero h1 { font-size: 22px; }
-      model-viewer { height: 400px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tito's cave AR Test</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 <body>
-  <div class="page">
-    <header class="hero">
-      <img class="side-image side-left" src="7A819726-1F62-4904-8B36-1AFF755FA06D.png" alt="Left image">
-      <h1>I am Daisy</h1>
-      <img class="side-image side-right" src="F05D0008-169D-411E-95B7-F47578DDF2E9.png" alt="Right image">
-    </header>
+<H2>This is Daisy</H2>
+<model-viewer src="Daisy.glb"
+ios-src="Daisy.usdz"
+alt="Daisy"
+ar
+auto-rotate
+camera-controls
+ar-modes="webxr scene-viewer quick-look"
+environment-image="neutral">
+</model-viewer>
+<script>
+async function checkARCoreCompatibility() {
+const modelViewer = document.getElementById('model-viewer');
+const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
+if (!isARCoreSupported) {
+modelViewer.removeAttribute('ar');
+modelViewer.removeAttribute('ar-modes');
+alert('Your device is not compatible with AR features. You can still view the 3D model.');
+}
+}
 
-    <main class="content">
-      <!-- ✅ AR enabled model-viewer -->
-      <model-viewer
-        src="daisy.glb"           <!-- GLB model for desktop/Android -->
-        ios-src="daisy.usdz"      <!-- USDZ model for iOS Quick Look -->
-        alt="3D model of Daisy"
-        camera-controls
-        auto-rotate
-        ar                                  <!-- enable AR on supported devices -->
-        ar-modes="webxr scene-viewer quick-look"
-        environment-image="neutral"
-        shadow-intensity="1"
-        exposure="1">
-          <!-- AR button will appear automatically on mobile -->
-          <button slot="ar-button" style="
-            background:#000;
-            color:#fff;
-            border:none;
-            padding:10px 20px;
-            border-radius:6px;
-            cursor:pointer;
-            font-size:16px;">
-            View in your space
-          </button>
-      </model-viewer>
-    </main>
-  </div>
+    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);  
+</script>  
+
 </body>
 </html>
