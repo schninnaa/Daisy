@@ -3,33 +3,107 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tito's cave AR Test</title>
+<title>Tito's Cave AR Test</title>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<!-- Google Fonts for fancier title -->
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #ffdef5, #c7d2ff);
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+
+  .title-container img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 15px #ff9cfb, 0 0 25px #ffcdfd;
+  }
+
+  h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+    color: #ff9cfb;
+    background: linear-gradient(90deg, #ff9cfb, #ffcdfd, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+  }
+
+  /* Glitter animation effect */
+  h2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  model-viewer {
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
+  }
+</style>
 </head>
+
 <body>
-<H2>This is Daisy</H2>
-<model-viewer src="Daisy.glb"
-ios-src="Daisy.usdz"
-alt="Daisy"
-ar
-auto-rotate
-camera-controls
-ar-modes="webxr scene-viewer quick-look"
-environment-image="neutral">
-</model-viewer>
-<script>
-async function checkARCoreCompatibility() {
-const modelViewer = document.getElementById('model-viewer');
-const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
-if (!isARCoreSupported) {
-modelViewer.removeAttribute('ar');
-modelViewer.removeAttribute('ar-modes');
-alert('Your device is not compatible with AR features. You can still view the 3D model.');
-}
-}
+  <div class="title-container">
+    <img src="F05D0008-169D-411E-95B7-F47578DDF2E9.png" alt="Left">
+    <h2>This is Daisy</h2>
+    <img src="F05D0008-169D-411E-95B7-F47578DDF2E9.png" alt="Right">
+  </div>
 
-    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);  
-</script>  
+  <model-viewer src="Daisy.glb"
+    ios-src="Daisy.usdz"
+    alt="Daisy"
+    ar
+    auto-rotate
+    camera-controls
+    ar-modes="webxr scene-viewer quick-look"
+    environment-image="neutral">
+  </model-viewer>
 
+  <script>
+    async function checkARCoreCompatibility() {
+      const modelViewer = document.querySelector('model-viewer');
+      if (navigator.xr) {
+        const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
+        if (!isARCoreSupported) {
+          modelViewer.removeAttribute('ar');
+          modelViewer.removeAttribute('ar-modes');
+          alert('Your device is not compatible with AR features. You can still view the 3D model.');
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+  </script>
 </body>
 </html>
