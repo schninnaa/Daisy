@@ -19,23 +19,48 @@
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Sparkling background overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* clicks pass through */
+    background-image: radial-gradient(circle, rgba(255,255,255,0.8) 2px, rgba(255,255,255,0) 3px);
+    background-size: 20px 20px;
+    animation: sparkle 3s linear infinite;
+    z-index: 0;
+    mix-blend-mode: lighten;
+  }
+
+  @keyframes sparkle {
+    0% { background-position: 0 0; }
+    50% { background-position: 10px 10px; }
+    100% { background-position: 0 0; }
   }
 
   .title-container {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
-    gap: 2rem; /* space between images and title */
+    gap: 2rem;
+    position: relative;
+    z-index: 1; /* above background sparkles */
   }
 
   .title-container img {
-    width: auto;       /* full natural width */
-    height: auto;      /* full natural height */
-    max-height: 200px; /* optional limit for layout */
-    border-radius: 0;  /* no round frame */
-    object-fit: contain; /* show entire image */
+    width: auto;
+    height: auto;
+    max-height: 200px;
+    border-radius: 0;
+    object-fit: contain;
     margin: 0;
-    box-shadow: none;  /* remove glow/frame */
+    box-shadow: none;
   }
 
   h2 {
@@ -48,7 +73,6 @@
     position: relative;
   }
 
-  /* Glitter animation effect on title only */
   h2::after {
     content: '';
     position: absolute;
@@ -72,50 +96,45 @@
     height: 500px;
     border-radius: 20px;
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
+    position: relative;
+    z-index: 1; /* above sparkles */
   }
 
   .description {
-    font-family: 'Quicksand', sans-serif; /* clean, rounded, readable */
+    font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
-    color: #ff6cfb; /* pastel pink-purple */
+    color: #ff6cfb;
     text-align: center;
     margin-top: 1.5rem;
     line-height: 1.5;
     max-width: 600px;
+    position: relative;
+    z-index: 1; /* above sparkles */
   }
 
-  /* Hearts container */
   #hearts-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* allow clicks through hearts */
+    pointer-events: none;
     overflow: hidden;
-    z-index: 1000;
+    z-index: 1000; /* above everything */
   }
 
   .heart {
     position: absolute;
-    width: 50px; /* small heart size */
-    height: 50px;
+    width: 70px; /* bigger hearts */
+    height: 70px;
     animation: floatHeart 3s ease-in-out forwards;
     opacity: 0;
   }
 
   @keyframes floatHeart {
-    0% {
-      transform: translateY(0) scale(0.5);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100px) scale(1);
-      opacity: 0;
-    }
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
   }
 
   @media (max-width: 600px) {
@@ -191,14 +210,14 @@
       const heart = document.createElement('img');
       heart.src = heartGif;
       heart.className = 'heart';
-      const heartSize = 55; // match CSS size
-      heart.style.left = Math.random() * (window.innerWidth - 30) + 'px';
-      heart.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+      const heartSize = 70;
+      heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
+      heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
       heartsContainer.appendChild(heart);
-      setTimeout(() => heartsContainer.removeChild(heart), 3000); // match animation duration
+      setTimeout(() => heartsContainer.removeChild(heart), 3000);
     }
 
-    setInterval(spawnHeart, 500); // spawn every 0.5s
+    setInterval(spawnHeart, 500);
   </script>
 </body>
 </html>
