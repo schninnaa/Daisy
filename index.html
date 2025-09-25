@@ -7,33 +7,100 @@
   <!-- Load model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
+    :root {
+      --max-width: 1000px;
+    }
     body {
       margin: 0;
-      background: #ffffff;         /* full white background */
+      background: #ffffff;                  /* all-white background */
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 30px 16px;
+    }
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    /* ----- HEADER ----- */
+    header.hero {
+      position: relative;
+      background: #000000;                  /* black header */
+      color: #ffffff;
+      height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;               /* fill the screen */
     }
+    header.hero h1 {
+      margin: 0;
+      font-size: 32px;
+      z-index: 2;
+    }
+
+    /* Side images */
+    .side-image {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 3px solid #ffffff;
+      background: #ffffff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+    }
+    .side-left  { left: 18px; }
+    .side-right { right: 18px; }
+
+    /* ----- MAIN CONTENT ----- */
+    main.content {
+      padding: 30px 20px 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
     model-viewer {
-      width: 90vw;                 /* responsive */
-      max-width: 800px;
-      height: 80vh;
-      background: #ffffff;         /* white viewer background */
+      width: 100%;
+      max-width: 720px;
+      height: 560px;
+      background: #ffffff;                  /* white viewer background */
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 640px) {
+      .side-image { display: none; }
+      header.hero h1 { font-size: 22px; }
+      model-viewer { height: 400px; }
     }
   </style>
 </head>
 <body>
+  <div class="page">
+    <header class="hero">
+      <img class="side-image side-left" src="DFBAA026-C10D-404C-80CB-A997BB8AA569.PNG" alt="Left image">
+      <h1>I am Daisy</h1>
+      <img class="side-image side-right" src="6DD888C5-5C2A-40B4-94AE-462CE5DFCD81.PNG" alt="Right image">
+    </header>
 
-  <!-- ✅ Change the path if your file is elsewhere -->
-  <model-viewer src="Daisy.glb"
-    alt="3D model of Daisy"
-    camera-controls
-    auto-rotate
-    environment-image="neutral"
-    exposure="1"
-    shadow-intensity="1">
-  </model-viewer>
-
+    <main class="content">
+      <!-- ✅ Make sure this path matches your actual model file -->
+      <model-viewer src="daisy.glb"
+        alt="3D model of Daisy"
+        camera-controls
+        auto-rotate
+        environment-image="neutral"
+        shadow-intensity="1"
+        exposure="1">
+      </model-viewer>
+    </main>
+  </div>
 </body>
 </html>
