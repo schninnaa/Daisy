@@ -160,7 +160,7 @@
 
       <!-- Example direct Quick Look link (uncomment if you host the usdz publicly). -->
       <!--
-      <a rel="ar" href="https://yourdomain.com/models/daisy.usdz">
+      <a rel="ar" href="Daisy.usdz">
         <img src="/models/daisy-poster.jpg" alt="View Daisy in AR on iOS" style="max-width:360px;width:100%;border-radius:10px;border:1px solid #e5e7eb;margin-top:8px;">
       </a>
       -->
