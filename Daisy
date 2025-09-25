@@ -135,53 +135,36 @@
     </header>
 
     <main class="content">
-      <!-- model-viewer: replace the src and ios-src values with your own files -->
+      <!-- model-viewer: use relative paths to the models folder -->
       <model-viewer id="mv"
-        src="/models/daisy.glb"
-        ios-src="/models/daisy.usdz"
+        src="./models/daisy.glb"
+        ios-src="./models/daisy.usdz"
         alt="3D model of Daisy"
         camera-controls
         ar
         ar-modes="webxr scene-viewer quick-look"
         environment-image="neutral"
-        poster="/models/daisy-poster.jpg"
+        poster="./models/daisy-poster.jpg"
         shadow-intensity="1"
         exposure="1"
         autoplay
-        >
-        <!-- Fallback link for iOS Quick Look (USDZ). Useful when model-viewer can't trigger Quick Look automatically. -->
+      >
+        <!-- AR Button -->
         <button slot="ar-button" aria-hidden="false">View in your space</button>
       </model-viewer>
 
-      <!-- Optional AR Quick Look link (iOS). Useful for direct linking to the USDZ file when testing on iPhone/iPad. -->
       <p class="notes">
-        To make AR work properly on iOS (USDZ / Quick Look) and Android (Scene Viewer / WebXR): host these files over <strong>HTTPS</strong> and, for iOS Quick Look, provide a direct <code>rel="ar"</code> link to the .usdz file. Example below — uncomment and edit when needed.
+        To make AR work properly on iOS (USDZ / Quick Look) and Android (Scene Viewer / WebXR):
+        host these files over <strong>HTTPS</strong>.
       </p>
-
-      <!-- Example direct Quick Look link (uncomment if you host the usdz publicly). -->
-      <!--
-      <a rel="ar" href="Daisy.usdz">
-        <img src="/models/daisy-poster.jpg" alt="View Daisy in AR on iOS" style="max-width:360px;width:100%;border-radius:10px;border:1px solid #e5e7eb;margin-top:8px;">
-      </a>
-      -->
-
-      <div class="notes">
-        <strong>How to customize</strong>:
-        <ul style="text-align:left;display:inline-block;margin:8px 0;padding-left:18px;">
-          <li>Edit the hero <code>background-image</code> URL at the &lt;header class="hero" style="..."&gt; line.</li>
-          <li>Replace the two decorative images' <code>src</code> URLs for left/right images.</li>
-          <li>Put your GLB at <code>/models/daisy.glb</code> and USDZ at <code>/models/daisy.usdz</code> or change the <code>src</code> and <code>ios-src</code> attributes to point to your hosted files.</li>
-        </ul>
-      </div>
     </main>
   </div>
 
-  <!-- Small helper: if you want to open Quick Look from the page programmatically on iOS, you can create a small anchor and click it. Example JS (optional): -->
+  <!-- Optional JS for extra interactions -->
   <script>
-    // Example: open quick look on iOS when AR button is pressed — only works if an ios-src/usdz link exists and browser allows it.
     document.addEventListener('click', (e) => {
       if(e.target && e.target.closest('button')){
-        // If you want custom behavior when the AR button is clicked, implement here.
+        // Custom AR button behavior if needed
       }
     });
   </script>
