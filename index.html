@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>I am Daisy</title>
-  <!-- Load model-viewer -->
+  <!-- model-viewer for 3D + AR -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     :root {
@@ -12,7 +12,7 @@
     }
     body {
       margin: 0;
-      background: #ffffff;                  /* all-white background */
+      background: #ffffff;      /* all-white page background */
       font-family: Arial, Helvetica, sans-serif;
       display: flex;
       justify-content: center;
@@ -30,7 +30,7 @@
     /* ----- HEADER ----- */
     header.hero {
       position: relative;
-      background: #000000;                  /* black header */
+      background: #000000;      /* black header */
       color: #ffffff;
       height: 200px;
       display: flex;
@@ -70,7 +70,7 @@
       width: 100%;
       max-width: 720px;
       height: 560px;
-      background: #ffffff;                  /* white viewer background */
+      background: #ffffff;      /* white viewer background */
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.05);
     }
@@ -91,14 +91,29 @@
     </header>
 
     <main class="content">
-      <!-- ✅ Make sure this path matches your actual model file -->
-      <model-viewer src="Daisy.glb"
+      <!-- ✅ AR enabled model-viewer -->
+      <model-viewer
+        src="./models/daisy.glb"           <!-- GLB model for desktop/Android -->
+        ios-src="./models/daisy.usdz"      <!-- USDZ model for iOS Quick Look -->
         alt="3D model of Daisy"
         camera-controls
         auto-rotate
+        ar                                  <!-- enable AR on supported devices -->
+        ar-modes="webxr scene-viewer quick-look"
         environment-image="neutral"
         shadow-intensity="1"
         exposure="1">
+          <!-- AR button will appear automatically on mobile -->
+          <button slot="ar-button" style="
+            background:#000;
+            color:#fff;
+            border:none;
+            padding:10px 20px;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:16px;">
+            View in your space
+          </button>
       </model-viewer>
     </main>
   </div>
