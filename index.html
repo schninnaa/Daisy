@@ -7,7 +7,7 @@
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <!-- Google Fonts for fancier title -->
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand&display=swap" rel="stylesheet">
 
 <style>
   body {
@@ -18,6 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
   }
 
   .title-container {
@@ -73,9 +74,8 @@
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
   }
 
-  /* Cute description below 3D model */
   .description {
-    font-family: 'Quicksand', sans-serif; /* playful, cute font */
+    font-family: 'Quicksand', sans-serif; /* clean, rounded, readable */
     font-size: 1.2rem;
     color: #ff6cfb; /* pastel pink-purple */
     text-align: center;
@@ -84,27 +84,60 @@
     max-width: 600px;
   }
 
-  /* Responsive adjustments for mobile */
+  /* Hearts container */
+  #hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* allow clicks through hearts */
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  .heart {
+    position: absolute;
+    width: 30px; /* small heart size */
+    height: 30px;
+    animation: floatHeart 3s ease-in-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes floatHeart {
+    0% {
+      transform: translateY(0) scale(0.5);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) scale(1);
+      opacity: 0;
+    }
+  }
+
   @media (max-width: 600px) {
     .title-container {
-      flex-direction: column; /* stack images and title vertically */
-      gap: 1rem;              /* smaller spacing for mobile */
+      flex-direction: column;
+      gap: 1rem;
       align-items: center;
     }
 
     .title-container img {
-      max-width: 80%;   /* scale images to fit screen */
-      height: auto;     /* maintain aspect ratio */
+      max-width: 80%;
+      height: auto;
       margin: 0;
     }
 
     h2 {
-      font-size: 2rem;  /* scale title down for mobile */
+      font-size: 2rem;
       text-align: center;
     }
 
     .description {
-      font-size: 1rem; /* smaller text for mobile */
+      font-size: 1rem;
       padding: 0 1rem;
     }
   }
@@ -112,6 +145,9 @@
 </head>
 
 <body>
+  <!-- Hearts effect container -->
+  <div id="hearts-container"></div>
+
   <div class="title-container">
     <img src="7A819726-1F62-4904-8B36-1AFF755FA06D.png" alt="Left">
     <h2>This is Daisy</h2>
@@ -129,7 +165,7 @@
   </model-viewer>
 
   <p class="description">
-    Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when shes's extra hungry!
+    Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when she's extra hungry!
   </p>
 
   <script>
@@ -146,6 +182,22 @@
     }
 
     document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+
+    // Floating hearts effect
+    const heartsContainer = document.getElementById('hearts-container');
+    const heartGif = 'hearts-spin.gif'; // replace with your heart GIF file
+
+    function spawnHeart() {
+      const heart = document.createElement('img');
+      heart.src = heartGif;
+      heart.className = 'heart';
+      heart.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+      heart.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heartsContainer.removeChild(heart), 3000); // match animation duration
+    }
+
+    setInterval(spawnHeart, 500); // spawn every 0.5s
   </script>
 </body>
 </html>
