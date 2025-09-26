@@ -247,7 +247,7 @@
   <button class="reaction-button" id="reactionButton">♥︎ My honest reaction ♥︎</button>
   <audio id="reactionSound" src="aww.mp3"></audio> <!-- Replace with your sound file -->
   <!-- Kawaii background music -->
-  <audio id="kawaiiMusic" src="kawaii.mp3" loop autoplay></audio>
+  <audio id="kawaiiMusic" src="kawaii.mp3" loop></audio>
 
   <p class="description">
     Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when she's extra hungry!
@@ -255,11 +255,16 @@
 
   <script>
     // Play kawaii music quietly on loop
+    // Start kawaii music quietly on loop after first user interaction
     document.addEventListener('DOMContentLoaded', () => {
       const music = document.getElementById('kawaiiMusic');
       if (music) {
         music.volume = 0.18;
-        music.play();
+        const startMusic = () => {
+          music.play();
+          document.removeEventListener('click', startMusic);
+        };
+        document.addEventListener('click', startMusic);
       }
     });
     async function checkARCoreCompatibility() {
