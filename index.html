@@ -10,6 +10,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand&display=swap" rel="stylesheet">
 
 <style>
+  @keyframes disco-bg {
+  0% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
+  10% { background: linear-gradient(135deg, #fff700, #ff3ca6); box-shadow: 0 0 80px 30px #00ffd0, 0 0 100px 20px #fff; }
+  20% { background: linear-gradient(135deg, #00ffd0, #ff00cc); box-shadow: 0 0 100px 40px #ff9cfb, 0 0 80px 20px #fff700; }
+  30% { background: linear-gradient(135deg, #ff3ca6, #fff); box-shadow: 0 0 120px 50px #ff00cc, 0 0 60px 10px #00ffe7; }
+  40% { background: linear-gradient(135deg, #fff700, #00ffd0); box-shadow: 0 0 80px 30px #ff3ca6, 0 0 100px 20px #fff; }
+  50% { background: linear-gradient(135deg, #ff00cc, #fff700); box-shadow: 0 0 100px 40px #00ffd0, 0 0 80px 20px #ff9cfb; }
+  60% { background: linear-gradient(135deg, #00ffe7, #ff3ca6); box-shadow: 0 0 120px 50px #fff, 0 0 60px 10px #ff00cc; }
+  70% { background: linear-gradient(135deg, #ff9cfb, #fff700); box-shadow: 0 0 80px 30px #ff3ca6, 0 0 100px 20px #fff; }
+  80% { background: linear-gradient(135deg, #fff, #ff00cc); box-shadow: 0 0 100px 40px #00ffd0, 0 0 80px 20px #ff9cfb; }
+  90% { background: linear-gradient(135deg, #ff3ca6, #00ffe7); box-shadow: 0 0 120px 50px #fff700, 0 0 60px 10px #ff00cc; }
+  100% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
+  }
+  .disco {
+    animation: disco-bg 2s linear;
+    box-shadow: 0 0 80px 30px #fff700, 0 0 120px 40px #ff3ca6;
+  }
   button:hover {
   transform: scale(1.13);
   transition: transform 0.18s, box-shadow 0.18s;
@@ -252,14 +269,17 @@
     const heartsContainer = document.getElementById('hearts-container');
     const heartGif = 'hearts-spin.gif';
     function spawnHeart() {
-      const heart = document.createElement('img');
-      heart.src = heartGif;
-      heart.className = 'heart';
-      const heartSize = 70;
-      heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
-      heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
-      heartsContainer.appendChild(heart);
-      setTimeout(() => heartsContainer.removeChild(heart), 3000);
+  const heart = document.createElement('img');
+  heart.src = heartGif;
+  heart.className = 'heart';
+  // If called with big=true, make heart larger
+  const heartSize = spawnHeart.big ? 180 : 70;
+  heart.style.width = heartSize + 'px';
+  heart.style.height = heartSize + 'px';
+  heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
+  heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
+  heartsContainer.appendChild(heart);
+  setTimeout(() => heartsContainer.removeChild(heart), 3000);
     }
     setInterval(spawnHeart, 500);
 
@@ -295,6 +315,12 @@
     reactionButton.addEventListener('click', () => {
       reactionSound.currentTime = 0;
       reactionSound.play();
+      // Spawn a burst of big hearts
+      spawnHeart.big = true;
+      for (let i = 0; i < 30; i++) {
+        setTimeout(spawnHeart, i * 50);
+      }
+      spawnHeart.big = false;
     });
   </script>
   <div style="width:100%; display:flex; justify-content:center; gap:1.5rem; margin-top:3rem; margin-bottom:2rem;">
