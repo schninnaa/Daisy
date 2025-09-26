@@ -246,12 +246,22 @@
   <!-- Reaction button -->
   <button class="reaction-button" id="reactionButton">♥︎ My honest reaction ♥︎</button>
   <audio id="reactionSound" src="aww.mp3"></audio> <!-- Replace with your sound file -->
+  <!-- Kawaii background music -->
+  <audio id="kawaiiMusic" src="kawaii.mp3" loop autoplay></audio>
 
   <p class="description">
     Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when she's extra hungry!
   </p>
 
   <script>
+    // Play kawaii music quietly on loop
+    document.addEventListener('DOMContentLoaded', () => {
+      const music = document.getElementById('kawaiiMusic');
+      if (music) {
+        music.volume = 0.18;
+        music.play();
+      }
+    });
     async function checkARCoreCompatibility() {
       const modelViewer = document.querySelector('model-viewer');
       if (navigator.xr) {
@@ -269,17 +279,14 @@
     const heartsContainer = document.getElementById('hearts-container');
     const heartGif = 'hearts-spin.gif';
     function spawnHeart() {
-  const heart = document.createElement('img');
-  heart.src = heartGif;
-  heart.className = 'heart';
-  // If called with big=true, make heart larger
-  const heartSize = spawnHeart.big ? 180 : 70;
-  heart.style.width = heartSize + 'px';
-  heart.style.height = heartSize + 'px';
-  heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
-  heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
-  heartsContainer.appendChild(heart);
-  setTimeout(() => heartsContainer.removeChild(heart), 3000);
+      const heart = document.createElement('img');
+      heart.src = heartGif;
+      heart.className = 'heart';
+      const heartSize = 70;
+      heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
+      heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heartsContainer.removeChild(heart), 3000);
     }
     setInterval(spawnHeart, 500);
 
@@ -315,12 +322,10 @@
     reactionButton.addEventListener('click', () => {
       reactionSound.currentTime = 0;
       reactionSound.play();
-      // Spawn a burst of big hearts
-      spawnHeart.big = true;
-      for (let i = 0; i < 30; i++) {
-        setTimeout(spawnHeart, i * 50);
+      // Spawn a burst of hearts instead of disco effect
+      for (let i = 0; i < 15; i++) {
+        setTimeout(spawnHeart, i * 80);
       }
-      spawnHeart.big = false;
     });
   </script>
   <div style="width:100%; display:flex; justify-content:center; gap:1.5rem; margin-top:3rem; margin-bottom:2rem;">
