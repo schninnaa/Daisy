@@ -222,7 +222,7 @@
 
   <body>
     <!-- Music control button -->
-    <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">🔊 Music</button>
+  <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">� Music</button>
   <!-- Floating hearts -->
   <div id="hearts-container"></div>
 
@@ -261,20 +261,27 @@
     document.addEventListener('DOMContentLoaded', () => {
       const music = document.getElementById('kawaiiMusic');
       const musicToggle = document.getElementById('musicToggle');
-      let isMuted = false;
+      let isMuted = true;
+      // Always set button to muted state on load
+      if (musicToggle) {
+        musicToggle.textContent = '🔇 Music';
+      }
       if (music) {
         music.volume = 0.18;
+        music.muted = true;
         const startMusic = () => {
           music.play();
           document.removeEventListener('click', startMusic);
         };
         document.addEventListener('click', startMusic);
         // Music toggle button
-        musicToggle.addEventListener('click', () => {
-          isMuted = !isMuted;
-          music.muted = isMuted;
-          musicToggle.textContent = isMuted ? '🔇 Music' : '🔊 Music';
-        });
+        if (musicToggle) {
+          musicToggle.addEventListener('click', () => {
+            isMuted = !isMuted;
+            music.muted = isMuted;
+            musicToggle.textContent = isMuted ? '🔇 Music' : '🔊 Music';
+          });
+        }
       }
     });
     async function checkARCoreCompatibility() {
