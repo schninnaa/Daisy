@@ -220,7 +220,9 @@
 </style>
 </head>
 
-<body>
+  <body>
+    <!-- Music control button -->
+    <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">🔊 Music</button>
   <!-- Floating hearts -->
   <div id="hearts-container"></div>
 
@@ -258,13 +260,21 @@
     // Start kawaii music quietly on loop after first user interaction
     document.addEventListener('DOMContentLoaded', () => {
       const music = document.getElementById('kawaiiMusic');
+      const musicToggle = document.getElementById('musicToggle');
+      let isMuted = false;
       if (music) {
-        music.volume = 0.28;
+        music.volume = 0.18;
         const startMusic = () => {
           music.play();
           document.removeEventListener('click', startMusic);
         };
         document.addEventListener('click', startMusic);
+        // Music toggle button
+        musicToggle.addEventListener('click', () => {
+          isMuted = !isMuted;
+          music.muted = isMuted;
+          musicToggle.textContent = isMuted ? '🔇 Music' : '🔊 Music';
+        });
       }
     });
     async function checkARCoreCompatibility() {
@@ -327,10 +337,15 @@
     reactionButton.addEventListener('click', () => {
       reactionSound.currentTime = 0;
       reactionSound.play();
-      // Spawn a burst of hearts instead of disco effect
-      for (let i = 0; i < 15; i++) {
-        setTimeout(spawnHeart, i * 80);
+      // Spawn hearts rapidly for 2 seconds
+      const start = Date.now();
+      function burstHearts() {
+        if (Date.now() - start < 2000) {
+          for (let i = 0; i < 5; i++) spawnHeart();
+          setTimeout(burstHearts, 80);
+        }
       }
+      burstHearts();
     });
   </script>
   <div style="width:100%; display:flex; justify-content:center; gap:1.5rem; margin-top:3rem; margin-bottom:2rem;">
