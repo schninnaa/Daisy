@@ -62,7 +62,7 @@
 
   @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
 
-  /* Model viewer */
+  /* Model viewer - no glow at all */
   model-viewer {
     width: 100%;
     max-width: 600px;
@@ -70,7 +70,7 @@
     border-radius: 20px;
     outline: none !important;
     border: none !important;
-    box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
+    box-shadow: none; /* removed glow */
     --poster-color: transparent;
     --shadow-intensity: 0;
   }
