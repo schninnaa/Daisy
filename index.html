@@ -6,8 +6,8 @@
 <title>This is DAISY</title>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+<!-- Google Fonts for fancier title -->
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand&display=swap" rel="stylesheet">
 
 <style>
   @keyframes disco-bg {
@@ -24,11 +24,29 @@
     100% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
   }
 
+  .disco {
+    animation: disco-bg 2s linear;
+    box-shadow: 0 0 80px 30px #fff700, 0 0 120px 40px #ff3ca6;
+  }
+
+  button:hover {
+    transform: scale(1.13);
+    transition: transform 0.18s, box-shadow 0.18s;
+    box-shadow: 0 0 0 4px #fff, 0 0 16px 4px #ff6cfb, 0 0 32px 8px #ff3ca6;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    10% { transform: scale(1.13); }
+    20% { transform: scale(1); }
+    100% { transform: scale(1); }
+  }
+
   body {
     margin: 0;
     padding: 2rem;
     background: linear-gradient(135deg, #ffdef5, #c7d2ff);
-    font-family: 'Quicksand', sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,6 +66,8 @@
     height: auto;
     max-height: 200px;
     object-fit: contain;
+    margin: 0;
+    box-shadow: none;
   }
 
   h2 {
@@ -85,18 +105,32 @@
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
   }
 
+  .reaction-button {
+    margin: 1rem 0;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #ff3ca6;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: pulse 2.2s infinite;
+  }
+
   .description {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
-    font-weight: bold;
     color: #ff6cfb;
+    font-weight: bold;
     text-align: center;
     margin-top: 1.5rem;
     line-height: 1.5;
     max-width: 600px;
   }
 
-  /* Floating hearts and comments */
   #hearts-container, #comments-container {
     position: fixed;
     top: 0;
@@ -141,25 +175,6 @@
     100% { transform: translateY(-120px) scale(1); opacity: 0; }
   }
 
-  /* Unified cute pink button style */
-  .pink-btn {
-    padding: 0.8rem 1.5rem;
-    font-weight: bold;
-    border-radius: 15px;
-    border: none;
-    background: #ff3ca6;
-    color: #fff;
-    cursor: pointer;
-    font-family: 'Quicksand', sans-serif;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-
-  .pink-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  }
-
   /* Comment input box */
   .comment-box-container {
     width: 90%;
@@ -183,19 +198,38 @@
     font-family: 'Quicksand', sans-serif;
   }
 
+  .comment-box-container button {
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    background: #ff3ca6;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .comment-box-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
   @media (max-width: 600px) {
-    h2 { font-size: 2rem; text-align: center; }
-    .description { font-size: 1rem; padding: 0 1rem; }
-    .pink-btn { padding: 0.6rem 1.2rem; font-size: 1rem; }
+    .title-container { flex-direction: column; gap:1rem; align-items:center; }
+    .title-container img { max-width: 80%; height:auto; }
+    h2 { font-size: 2rem; text-align:center; }
+    .description { font-size:1rem; padding:0 1rem; }
+    .comment { font-size:0.9rem; }
   }
 </style>
 </head>
 
 <body>
   <!-- Music toggle -->
-  <button id="musicToggle" class="pink-btn" style="position:fixed;top:18px;right:18px;z-index:99;">🔇 Music</button>
+  <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">🔇 Music</button>
 
-  <!-- Floating hearts/comments -->
   <div id="hearts-container"></div>
   <div id="comments-container"></div>
 
@@ -215,8 +249,7 @@
     environment-image="neutral">
   </model-viewer>
 
-  <!-- Reaction button -->
-  <button class="pink-btn" id="reactionButton">♥︎ My honest reaction ♥︎</button>
+  <button class="reaction-button" id="reactionButton">♥︎ My honest reaction ♥︎</button>
   <audio id="reactionSound" src="aww.mp3"></audio>
   <audio id="kawaiiMusic" src="kawaii.mp3" loop></audio>
 
@@ -226,14 +259,14 @@
 
   <!-- Navigation buttons -->
   <div style="width:100%; display:flex; justify-content:center; gap:1.5rem; margin-top:3rem; margin-bottom:2rem;">
-    <a href="https://lorrritta.github.io/Projekt_Loretta/"><button class="pink-btn">TAKE ME BACK</button></a>
-    <a href="https://julypetry.github.io/projekt3d/"><button class="pink-btn">WHAT'S NEXT?!</button></a>
+    <a href="https://lorrritta.github.io/Projekt_Loretta/"><button style="padding:0.5rem 1.2rem; font-size:0.95rem; border-radius:12px; border:none; background:#ff3ca6; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.15); cursor:pointer; transition:background 0.2s;">TAKE ME BACK</button></a>
+    <a href="https://julypetry.github.io/projekt3d/"><button style="padding:0.5rem 1.2rem; font-size:0.95rem; border-radius:12px; border:none; background:#ff3ca6; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.15); cursor:pointer; transition:background 0.2s;">WHAT'S NEXT?!</button></a>
   </div>
 
   <!-- Comment input -->
   <div class="comment-box-container">
     <input type="text" id="userComment" placeholder="Write a cute comment..." />
-    <button class="pink-btn" id="sendComment">Send</button>
+    <button id="sendComment">Send</button>
   </div>
 
 <script>
