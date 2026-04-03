@@ -6,7 +6,7 @@
 <title>This is DAISY</title>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-<!-- Google Fonts for fancier title -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 
 <style>
@@ -47,10 +47,7 @@
     width: auto;
     height: auto;
     max-height: 200px;
-    border-radius: 0;
     object-fit: contain;
-    margin: 0;
-    box-shadow: none;
   }
 
   h2 {
@@ -88,27 +85,6 @@
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
   }
 
-  .reaction-button {
-    margin: 1rem 0;
-    padding: 0.8rem 1.5rem;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #ff3ca6;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-    animation: pulse 2.2s infinite;
-  }
-
-  .reaction-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  }
-
   .description {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
@@ -120,6 +96,7 @@
     max-width: 600px;
   }
 
+  /* Floating hearts and comments */
   #hearts-container, #comments-container {
     position: fixed;
     top: 0;
@@ -164,7 +141,26 @@
     100% { transform: translateY(-120px) scale(1); opacity: 0; }
   }
 
-  /* New cute pink comment box */
+  /* Unified cute pink button style */
+  .pink-btn {
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    background: #ff3ca6;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .pink-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
+  /* Comment input box */
   .comment-box-container {
     width: 90%;
     max-width: 600px;
@@ -187,37 +183,20 @@
     font-family: 'Quicksand', sans-serif;
   }
 
-  .comment-box-container button {
-    padding: 0.8rem 1.2rem;
-    font-weight: bold;
-    border-radius: 15px;
-    border: none;
-    background: #ff3ca6;
-    color: #fff;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-
-  .comment-box-container button:hover {
-    transform: scale(1.05);
-  }
-
   @media (max-width: 600px) {
     h2 { font-size: 2rem; text-align: center; }
     .description { font-size: 1rem; padding: 0 1rem; }
-    .reaction-button { font-size: 1rem; padding: 0.6rem 1.2rem; }
+    .pink-btn { padding: 0.6rem 1.2rem; font-size: 1rem; }
   }
 </style>
 </head>
 
 <body>
-  <!-- Music control button -->
-  <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">🔇 Music</button>
+  <!-- Music toggle -->
+  <button id="musicToggle" class="pink-btn" style="position:fixed;top:18px;right:18px;z-index:99;">🔇 Music</button>
 
-  <!-- Floating hearts -->
+  <!-- Floating hearts/comments -->
   <div id="hearts-container"></div>
-
-  <!-- Floating comments -->
   <div id="comments-container"></div>
 
   <div class="title-container">
@@ -237,9 +216,8 @@
   </model-viewer>
 
   <!-- Reaction button -->
-  <button class="reaction-button" id="reactionButton">♥︎ My honest reaction ♥︎</button>
-  <audio id="reactionSound" src="aww.mp3"></audio> <!-- Replace with your sound file -->
-  <!-- Kawaii background music -->
+  <button class="pink-btn" id="reactionButton">♥︎ My honest reaction ♥︎</button>
+  <audio id="reactionSound" src="aww.mp3"></audio>
   <audio id="kawaiiMusic" src="kawaii.mp3" loop></audio>
 
   <p class="description">
@@ -248,18 +226,14 @@
 
   <!-- Navigation buttons -->
   <div style="width:100%; display:flex; justify-content:center; gap:1.5rem; margin-top:3rem; margin-bottom:2rem;">
-    <a href="https://lorrritta.github.io/Projekt_Loretta/" class="nav-btn" style="text-decoration:none;">
-      <button>TAKE ME BACK</button>
-    </a>
-    <a href="https://julypetry.github.io/projekt3d/" class="nav-btn" style="text-decoration:none;">
-      <button>WHAT'S NEXT?!</button>
-    </a>
+    <a href="https://lorrritta.github.io/Projekt_Loretta/"><button class="pink-btn">TAKE ME BACK</button></a>
+    <a href="https://julypetry.github.io/projekt3d/"><button class="pink-btn">WHAT'S NEXT?!</button></a>
   </div>
 
-  <!-- New comment box -->
+  <!-- Comment input -->
   <div class="comment-box-container">
     <input type="text" id="userComment" placeholder="Write a cute comment..." />
-    <button id="sendComment">Send</button>
+    <button class="pink-btn" id="sendComment">Send</button>
   </div>
 
 <script>
@@ -294,7 +268,7 @@
   }
   setInterval(spawnHeart, 500);
 
-  // Floating comments
+  // Floating auto-comments
   const commentsContainer = document.getElementById('comments-container');
   const commentTexts = ["Hi Daisy!", "So cute!", "I'm your biggest fan!", "Love you!", "Adorable!", "Cutest dragon ever!", "Wow!", "Hello Daisy!"];
   function spawnComment() {
