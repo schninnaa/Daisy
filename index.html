@@ -7,42 +7,28 @@
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <!-- Google Fonts for fancier title -->
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 
 <style>
   @keyframes disco-bg {
-  0% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
-  10% { background: linear-gradient(135deg, #fff700, #ff3ca6); box-shadow: 0 0 80px 30px #00ffd0, 0 0 100px 20px #fff; }
-  20% { background: linear-gradient(135deg, #00ffd0, #ff00cc); box-shadow: 0 0 100px 40px #ff9cfb, 0 0 80px 20px #fff700; }
-  30% { background: linear-gradient(135deg, #ff3ca6, #fff); box-shadow: 0 0 120px 50px #ff00cc, 0 0 60px 10px #00ffe7; }
-  40% { background: linear-gradient(135deg, #fff700, #00ffd0); box-shadow: 0 0 80px 30px #ff3ca6, 0 0 100px 20px #fff; }
-  50% { background: linear-gradient(135deg, #ff00cc, #fff700); box-shadow: 0 0 100px 40px #00ffd0, 0 0 80px 20px #ff9cfb; }
-  60% { background: linear-gradient(135deg, #00ffe7, #ff3ca6); box-shadow: 0 0 120px 50px #fff, 0 0 60px 10px #ff00cc; }
-  70% { background: linear-gradient(135deg, #ff9cfb, #fff700); box-shadow: 0 0 80px 30px #ff3ca6, 0 0 100px 20px #fff; }
-  80% { background: linear-gradient(135deg, #fff, #ff00cc); box-shadow: 0 0 100px 40px #00ffd0, 0 0 80px 20px #ff9cfb; }
-  90% { background: linear-gradient(135deg, #ff3ca6, #00ffe7); box-shadow: 0 0 120px 50px #fff700, 0 0 60px 10px #ff00cc; }
-  100% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
+    0% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
+    10% { background: linear-gradient(135deg, #fff700, #ff3ca6); box-shadow: 0 0 80px 30px #00ffd0, 0 0 100px 20px #fff; }
+    20% { background: linear-gradient(135deg, #00ffd0, #ff00cc); box-shadow: 0 0 100px 40px #ff9cfb, 0 0 80px 20px #fff700; }
+    30% { background: linear-gradient(135deg, #ff3ca6, #fff); box-shadow: 0 0 120px 50px #ff00cc, 0 0 60px 10px #00ffe7; }
+    40% { background: linear-gradient(135deg, #fff700, #00ffd0); box-shadow: 0 0 80px 30px #ff3ca6, 0 0 100px 20px #fff; }
+    50% { background: linear-gradient(135deg, #ff00cc, #fff700); box-shadow: 0 0 100px 40px #00ffd0, 0 0 80px 20px #ff9cfb; }
+    60% { background: linear-gradient(135deg, #00ffe7, #ff3ca6); box-shadow: 0 0 120px 50px #fff, 0 0 60px 10px #ff00cc; }
+    70% { background: linear-gradient(135deg, #ff9cfb, #fff700); box-shadow: 0 0 80px 30px #ff3ca6, 0 0 100px 20px #fff; }
+    80% { background: linear-gradient(135deg, #fff, #ff00cc); box-shadow: 0 0 100px 40px #00ffd0, 0 0 80px 20px #ff9cfb; }
+    90% { background: linear-gradient(135deg, #ff3ca6, #00ffe7); box-shadow: 0 0 120px 50px #fff700, 0 0 60px 10px #ff00cc; }
+    100% { background: linear-gradient(135deg, #ff00cc, #00ffe7); box-shadow: 0 0 60px 20px #fff700, 0 0 120px 40px #ff3ca6; }
   }
-  .disco {
-    animation: disco-bg 2s linear;
-    box-shadow: 0 0 80px 30px #fff700, 0 0 120px 40px #ff3ca6;
-  }
-  button:hover {
-  transform: scale(1.13);
-  transition: transform 0.18s, box-shadow 0.18s;
-  box-shadow: 0 0 0 4px #fff, 0 0 16px 4px #ff6cfb, 0 0 32px 8px #ff3ca6;
-  }
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    10% { transform: scale(1.13); }
-    20% { transform: scale(1); }
-    100% { transform: scale(1); }
-  }
+
   body {
     margin: 0;
     padding: 2rem;
     background: linear-gradient(135deg, #ffdef5, #c7d2ff);
-    font-family: Arial, sans-serif;
+    font-family: 'Quicksand', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,24 +93,15 @@
     padding: 0.8rem 1.5rem;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
-  color: #ffffff;
-  background-color: #ff3ca6;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ff3ca6;
     border: none;
     border-radius: 15px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: transform 0.2s, box-shadow 0.2s;
-  animation: pulse 2.2s infinite;
-  }
-
-  .reaction-button::after {
-  /* removed for blink effect */
-
-  @keyframes shine-move {
-    0% { transform: translateX(-100%); opacity: 0.7; }
-    60% { transform: translateX(100%); opacity: 0.9; }
-    100% { transform: translateX(100%); opacity: 0.7; }
-  }
+    animation: pulse 2.2s infinite;
   }
 
   .reaction-button:hover {
@@ -135,6 +112,7 @@
   .description {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
+    font-weight: bold;
     color: #ff6cfb;
     text-align: center;
     margin-top: 1.5rem;
@@ -170,6 +148,7 @@
     position: absolute;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.8rem;
+    font-weight: bold;
     color: #ff6cfb;
     background: rgba(255,255,255,0.2);
     padding: 2px 6px;
@@ -185,44 +164,56 @@
     100% { transform: translateY(-120px) scale(1); opacity: 0; }
   }
 
+  /* New cute pink comment box */
+  .comment-box-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .comment-box-container input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background: #ffcdfd;
+    color: #ff3ca6;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .comment-box-container button {
+    padding: 0.8rem 1.2rem;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    background: #ff3ca6;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .comment-box-container button:hover {
+    transform: scale(1.05);
+  }
+
   @media (max-width: 600px) {
-    .title-container {
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .title-container img {
-      max-width: 80%;
-      height: auto;
-      margin: 0;
-    }
-
-    h2 {
-      font-size: 2rem;
-      text-align: center;
-    }
-
-    .description {
-      font-size: 1rem;
-      padding: 0 1rem;
-    }
-
-    .comment {
-      font-size: 0.9rem;
-    }
-
-    .reaction-button {
-      font-size: 1rem;
-      padding: 0.6rem 1.2rem;
-    }
+    h2 { font-size: 2rem; text-align: center; }
+    .description { font-size: 1rem; padding: 0 1rem; }
+    .reaction-button { font-size: 1rem; padding: 0.6rem 1.2rem; }
   }
 </style>
 </head>
 
-  <body>
-    <!-- Music control button -->
-  <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">� Music</button>
+<body>
+  <!-- Music control button -->
+  <button id="musicToggle" style="position:fixed;top:18px;right:18px;z-index:99;padding:0.5rem 1rem;font-size:1.1rem;border-radius:14px;border:none;background:#ff9cfb;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:background 0.2s;">🔇 Music</button>
+
   <!-- Floating hearts -->
   <div id="hearts-container"></div>
 
@@ -255,113 +246,99 @@
     Daisy is a 5 year old Bearded Dragon! She loves to eat carrots and crickets and taking naps under her tree bark. She's usually pretty chill and just stares at you all day, but occasionally she loves to follow your movements when she's extra hungry!
   </p>
 
-  <script>
-    // Play kawaii music quietly on loop
-    // Start kawaii music quietly on loop after first user interaction
-    document.addEventListener('DOMContentLoaded', () => {
-      const music = document.getElementById('kawaiiMusic');
-      const musicToggle = document.getElementById('musicToggle');
-      let isMuted = true;
-      // Always set button to muted state on load
-      if (musicToggle) {
-        musicToggle.textContent = '🔇 Music';
-      }
-      if (music) {
-        music.volume = 0.28;
-        music.muted = true;
-        const startMusic = () => {
-          music.play();
-          document.removeEventListener('click', startMusic);
-        };
-        document.addEventListener('click', startMusic);
-        // Music toggle button
-        if (musicToggle) {
-          musicToggle.addEventListener('click', () => {
-            isMuted = !isMuted;
-            music.muted = isMuted;
-            musicToggle.textContent = isMuted ? '🔇 Music' : '🔊 Music';
-          });
-        }
-      }
-    });
-    async function checkARCoreCompatibility() {
-      const modelViewer = document.querySelector('model-viewer');
-      if (navigator.xr) {
-        const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
-        if (!isARCoreSupported) {
-          modelViewer.removeAttribute('ar');
-          modelViewer.removeAttribute('ar-modes');
-        }
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
-
-    // Floating hearts
-    const heartsContainer = document.getElementById('hearts-container');
-    const heartGif = 'hearts-spin.gif';
-    function spawnHeart() {
-      const heart = document.createElement('img');
-      heart.src = heartGif;
-      heart.className = 'heart';
-      const heartSize = 70;
-      heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
-      heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
-      heartsContainer.appendChild(heart);
-      setTimeout(() => heartsContainer.removeChild(heart), 3000);
-    }
-    setInterval(spawnHeart, 500);
-
-    // Floating comments
-    const commentsContainer = document.getElementById('comments-container');
-    const commentTexts = [
-      "Hi Daisy!",
-      "So cute!",
-      "I'm your biggest fan!",
-      "Love you!",
-      "Adorable!",
-      "Cutest dragon ever!",
-      "Wow!",
-      "Hello Daisy!"
-    ];
-
-    function spawnComment() {
-      const comment = document.createElement('div');
-      comment.className = 'comment';
-      comment.textContent = commentTexts[Math.floor(Math.random() * commentTexts.length)];
-      comment.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-      comment.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-      commentsContainer.appendChild(comment);
-      setTimeout(() => commentsContainer.removeChild(comment), 4000);
-    }
-
-    setInterval(spawnComment, 1000);
-
-    // Reaction button functionality
-    const reactionButton = document.getElementById('reactionButton');
-    const reactionSound = document.getElementById('reactionSound');
-
-    reactionButton.addEventListener('click', () => {
-      reactionSound.currentTime = 0;
-      reactionSound.play();
-      // Spawn hearts rapidly for 2 seconds
-      const start = Date.now();
-      function burstHearts() {
-        if (Date.now() - start < 2000) {
-          for (let i = 0; i < 5; i++) spawnHeart();
-          setTimeout(burstHearts, 80);
-        }
-      }
-      burstHearts();
-    });
-  </script>
+  <!-- Navigation buttons -->
   <div style="width:100%; display:flex; justify-content:center; gap:1.5rem; margin-top:3rem; margin-bottom:2rem;">
-  <a href="https://lorrritta.github.io/Projekt_Loretta/" class="nav-btn" style="text-decoration:none;">
-  <button style="padding:0.5rem 1.2rem; font-size:0.95rem; border-radius:12px; border:none; background:#ff3ca6; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.15); cursor:pointer; transition:background 0.2s;">TAKE ME BACK</button>
+    <a href="https://lorrritta.github.io/Projekt_Loretta/" class="nav-btn" style="text-decoration:none;">
+      <button>TAKE ME BACK</button>
     </a>
-  <a href="https://julypetry.github.io/projekt3d/" class="nav-btn" style="text-decoration:none;">
-  <button style="padding:0.5rem 1.2rem; font-size:0.95rem; border-radius:12px; border:none; background:#ff3ca6; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.15); cursor:pointer; transition:background 0.2s;">WHAT'S NEXT?!</button>
+    <a href="https://julypetry.github.io/projekt3d/" class="nav-btn" style="text-decoration:none;">
+      <button>WHAT'S NEXT?!</button>
     </a>
   </div>
+
+  <!-- New comment box -->
+  <div class="comment-box-container">
+    <input type="text" id="userComment" placeholder="Write a cute comment..." />
+    <button id="sendComment">Send</button>
+  </div>
+
+<script>
+  // Music toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('kawaiiMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isMuted = true;
+    music.volume = 0.28;
+    music.muted = true;
+    const startMusic = () => { music.play(); document.removeEventListener('click', startMusic); };
+    document.addEventListener('click', startMusic);
+    musicToggle.addEventListener('click', () => {
+      isMuted = !isMuted;
+      music.muted = isMuted;
+      musicToggle.textContent = isMuted ? '🔇 Music' : '🔊 Music';
+    });
+  });
+
+  // Floating hearts
+  const heartsContainer = document.getElementById('hearts-container');
+  const heartGif = 'hearts-spin.gif';
+  function spawnHeart() {
+    const heart = document.createElement('img');
+    heart.src = heartGif;
+    heart.className = 'heart';
+    const heartSize = 70;
+    heart.style.left = Math.random() * (window.innerWidth - heartSize) + 'px';
+    heart.style.top = Math.random() * (window.innerHeight - heartSize) + 'px';
+    heartsContainer.appendChild(heart);
+    setTimeout(() => heartsContainer.removeChild(heart), 3000);
+  }
+  setInterval(spawnHeart, 500);
+
+  // Floating comments
+  const commentsContainer = document.getElementById('comments-container');
+  const commentTexts = ["Hi Daisy!", "So cute!", "I'm your biggest fan!", "Love you!", "Adorable!", "Cutest dragon ever!", "Wow!", "Hello Daisy!"];
+  function spawnComment() {
+    const comment = document.createElement('div');
+    comment.className = 'comment';
+    comment.textContent = commentTexts[Math.floor(Math.random() * commentTexts.length)];
+    comment.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    comment.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+    commentsContainer.appendChild(comment);
+    setTimeout(() => commentsContainer.removeChild(comment), 4000);
+  }
+  setInterval(spawnComment, 1000);
+
+  // Reaction button
+  const reactionButton = document.getElementById('reactionButton');
+  const reactionSound = document.getElementById('reactionSound');
+  reactionButton.addEventListener('click', () => {
+    reactionSound.currentTime = 0;
+    reactionSound.play();
+    const start = Date.now();
+    function burstHearts() {
+      if (Date.now() - start < 2000) {
+        for (let i = 0; i < 5; i++) spawnHeart();
+        setTimeout(burstHearts, 80);
+      }
+    }
+    burstHearts();
+  });
+
+  // Comment box functionality
+  const sendButton = document.getElementById('sendComment');
+  const userInput = document.getElementById('userComment');
+  sendButton.addEventListener('click', () => {
+    if(userInput.value.trim() !== "") {
+      const comment = document.createElement('div');
+      comment.className = 'comment';
+      comment.textContent = userInput.value;
+      comment.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+      comment.style.top = window.innerHeight - 80 + 'px';
+      commentsContainer.appendChild(comment);
+      setTimeout(() => commentsContainer.removeChild(comment), 4000);
+      userInput.value = '';
+    }
+  });
+</script>
 </body>
 </html>
