@@ -72,6 +72,9 @@
     max-width: 600px;
     height: 500px;
     border-radius: 20px;
+    /* Remove AR border/frame */
+    outline: none;
+    border: none;
     box-shadow: 0 0 20px #ff9cfb, 0 0 40px #ffcdfd;
   }
 
@@ -86,7 +89,6 @@
     border-radius: 15px;
     cursor: pointer;
     animation: pulse 2.2s infinite;
-    /* 2000s bevel */
     box-shadow:
       inset -2px -2px 5px rgba(255,255,255,0.5),
       inset 2px 2px 5px rgba(0,0,0,0.2),
@@ -105,8 +107,8 @@
   .description {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
-    color: #ff6cfb;
     font-weight: bold;
+    color: #ff6cfb;
     text-align: center;
     margin-top: 1.5rem;
     line-height: 1.5;
@@ -162,7 +164,6 @@
     background: #ffcdfd;
     color: #ff3ca6;
     font-family: 'Quicksand', sans-serif;
-    /* 2000s bevel */
     box-shadow: inset -2px -2px 5px rgba(255,255,255,0.5),
                 inset 2px 2px 5px rgba(0,0,0,0.2),
                 2px 2px 5px rgba(0,0,0,0.2);
@@ -192,21 +193,22 @@
       4px 4px 10px rgba(0,0,0,0.3);
   }
 
-  /* Retro-style nav buttons */
+  /* Retro-style nav buttons restored to original DAISY style */
   a button {
-    box-shadow:
-      inset -2px -2px 5px rgba(255,255,255,0.5),
-      inset 2px 2px 5px rgba(0,0,0,0.2),
-      2px 2px 5px rgba(0,0,0,0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding:0.5rem 1.2rem;
+    font-size:0.95rem;
+    border-radius:12px;
+    border:none;
+    background:#ff3ca6;
+    color:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    cursor:pointer;
+    transition: background 0.2s, transform 0.2s;
   }
 
   a button:hover {
-    transform: scale(1.05);
-    box-shadow:
-      inset -2px -2px 5px rgba(255,255,255,0.5),
-      inset 2px 2px 5px rgba(0,0,0,0.2),
-      4px 4px 10px rgba(0,0,0,0.3);
+    transform: scale(1.13);
+    box-shadow: 0 0 0 4px #fff, 0 0 16px 4px #ff6cfb, 0 0 32px 8px #ff3ca6;
   }
 
   @media (max-width:600px) {
